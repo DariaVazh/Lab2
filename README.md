@@ -88,12 +88,12 @@
         int[][] a = new int[n][n];
         int [] glav = new int[n];
         int [] pob = new int[n];
-        int sumgl = 0;
-        int sumpob = 0;
+        double sumgl = 0;
+        double sumpob = 0;
         int flag;
         int flag2 = 0;
         int temp;
-        int sr;
+        double sr;
         int sumgl2 = 0;
         int sumpob2 = 0;
         int mins = 1000000000;
@@ -108,7 +108,7 @@
             }
         }
         
-        //Получение массива из элементов главной диагонали и суммы элементов шлавной диагонали
+        //Получение массива из элементов главной диагонали и суммы элементов главной диагонали
         for (int x = 0; x< a.length; x ++){
             for (int y = 0; y<a.length; y++){
                 if (x == y) { //индексы строки и столбца элементов главной оси равны
@@ -180,17 +180,18 @@
         }
 
         //Поиск среднего арифметического на пересечении диагоналей
-        sr = (sumgl + sumpob)/(2*a.length);
-        a[a.length/2][a.length/2] = sr;
+        sr = Math.round((sumgl + sumpob)/(2*a.length));
+        //Замена элемента на пересечении диагоналей на среднее арифметическое диагоналей
+        a[a.length/2][a.length/2] = (int)sr;
 
-        //Получение суммы элементов главной оси
+        //Получение суммы элементов главной диагонали
         for (int x = 0; x< a.length; x ++){
             for (int y = 0; y<a.length; y++){
                 if (x == y)
                     sumgl2+=a[x][y];
             }
         }
-        //Получение суммы элементов побочной оси
+        //Получение суммы элементов побочной диагонали
         for (int i = 0; i<a.length;i++){
             for (int j = a.length-1; j!=-1; j--){
                 if (i + j == a.length - 1)
@@ -200,7 +201,6 @@
 
         //Получение разницы между суммами диагоналей
         int differ = Math.abs(sumpob2-sumgl2);
-
 
         //Поиск и вывод на экран диагоналей массива
         out.println("Диагонали:");
